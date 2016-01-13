@@ -1,0 +1,20 @@
+#skeleton code for a sensor more methods will be added later
+
+class Sensor:
+    def __init__(this):
+        this.powerOn = False
+        d = None
+
+    def turn_On(this):
+        this.powerOn = True
+
+    def turn_Off(this):
+        this.powerOn = False
+
+    def Scan(this):
+        this.d = input("input data: ")
+
+    def data():
+        return "There will be data here according to the sensor"
+
+
