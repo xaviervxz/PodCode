@@ -1,0 +1,74 @@
+import Engine
+import Sensor
+import TurboFan
+
+op_speed = 15 #Our estimated operating speed is 100 m/s
+
+V_sensor = Sensor.Sensor() #Measure Velocity
+DR_sensor = Sensor.Sensor() #Measure distance by Red Tape(at the end of the tunnel for braking)
+DY_sensor = Sensor.Sensor() #Measure distance by Yellow Tape(at the end of the tunnel for braking)
+B1_sensor = Sensor.Sensor() #Measure distace to permanent magnets from the linear motor
+B2_sensor = Sensor.Sensor() #Measure the pressure of the cantilever breaks
+S_sensor = Sensor.Sensor() #Strain Gauge on equipment to warn us of failure
+
+compressor = TurboFan.TurboFan() #The primary aircompressor
+
+arxPax_System = Engine.Engine() #all of the ArxPax motors
+
+tubeLength = 5280 # Random tube length of 1 mile = 5280 feet
+distance = 0 #Distance traveled by pod
+
+def redStripe_detected(data_rate):
+   #Run photoelectric sensor
+   data = photoelectricSensor(data_rate) #Whatever function controls the sensor
+   if data == "Red":
+       return true
+def yellow_and_red_deteced(data_rate):
+   data = photoelectricSensor(data_rate) #Whatever function controls the sensor
+   if data == "Red" & "Yellow":
+       return true
+def count_stripe(interval):
+   if redStripe_detected(interval):
+       distance += 100 # In feet
+   if yellow_and_red_deteced(interval):
+       distance = tubeLength - 1000 # In feet
+def Navigation(refresh):
+   count_stripe(refresh) #Returns the overall distance traveled so far based on stripe pattern
+   print(distance)
+   if distance >= Threshold:
+       braking_procedure(distance)
+
+
+#The following block of code turns everything on
+arxPax_System.Startup()
+V_sensor.turn_On()
+DR_sensor.turn_On()
+DY_sensor.turn_On()
+B1_sensor.turn_On()
+B2_sensor.turn_On()
+S_sensor.turn_On()
+compressor.turnOn()
+
+"""Scans the speed from the sensor (currently takes input from the user, will be
+changed to take info from the sensor)"""
+while V_sensor.data != op_speed:
+    V_sensor.Scan()
+
+"""once the pod reaches operating speed turns off the four middle arkPax motors
+and places the remaing arxPax in a low-power mode"""
+if V_sensor.data == op_speed:
+    arxPax_System.Low_Power_Mode
+
+
+refresh_rate = input("Enter a period for sensor refresh rate: ")
+
+"""Loop for scanning for the end of the track and for braking
+
+(NOTE!!!!! IF BRAKING HASN'T BEGUN AT AROUND 1300 METERS IN (CONVERT TO FEET LATER)
+IMMEDIATELY BEGIN BRAKING!!!!!!"""
+while 1:
+   Navigation(refresh_rate)
+   if (distance <0) or (distance> tubeLength):
+       break
+
+
