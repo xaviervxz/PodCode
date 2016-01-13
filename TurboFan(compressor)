@@ -1,0 +1,12 @@
+
+#Skeleton code for the turbo fan
+
+class TurboFan:
+    def __init__(this):
+        this.powerOn = False
+
+    def turnOn():
+        this.powerOn = True
+
+    def turnOff():
+        this.powerOn = False
