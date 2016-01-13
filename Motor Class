@@ -1,0 +1,19 @@
+
+#skeleton code for an ArxPax Hover Engine motor more methods will be added later
+
+class Motor:
+
+    "Initializes the Motor objec"
+    def __init__(Motor):
+        Motor.powerOn = 0
+
+    """skeleton for the turnOn function. Will send signal to motors to turn them
+    on and sets the powerOn to True. More will be added later"""
+    def Low_Power():
+        Motor.powerOn = 1
+
+    """skeleton for the turnOff funciton. Will send signa to turn off motors and
+    sets the powerOn to False. More will be added later"""
+    def High_Power():
+        Motor.powerOn = 2
+
