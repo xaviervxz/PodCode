@@ -1,0 +1,49 @@
+#Class to handle all of the Arx pax motors
+
+import Motor
+
+class Engine:
+    def __init__(this):
+        this.E1 = Motor.Motor()
+        this.E2 = Motor.Motor()
+        this.E3 = Motor.Motor()
+        this.E4 = Motor.Motor()
+        this.E5 = Motor.Motor()
+        this.E6 = Motor.Motor()
+        this.E7 = Motor.Motor()
+        this.E8 = Motor.Motor()
+        this.E9 = Motor.Motor()
+        this.E10 = Motor.Motor()
+        this.E11 = Motor.Motor()
+        this.E12 = Motor.Motor()
+
+    def Startup(this):
+        this.E1.powerOn = 2
+        this.E2.powerOn = 2
+        this.E3.powerOn = 2
+        this.E4.powerOn = 2
+        this.E5.powerOn = 2
+        this.E6.powerOn = 2
+        this.E7.powerOn = 2
+        this.E8.powerOn = 2
+        this.E9.powerOn = 2
+        this.E10.powerOn = 2
+        this.E11.powerOn = 2
+        this.E12.powerOn = 2
+
+    def Low_Power_Mode(this):
+        this.E1.powerOn = 1
+        this.E2.powerOn = 1
+        this.E3.powerOn = 1
+        this.E4.powerOn = 1
+        this.E5.powerOn = 0
+        this.E6.powerOn = 0
+        this.E7.powerOn = 0
+        this.E8.powerOn = 0
+        this.E9.powerOn = 1
+        this.E10.powerOn = 1
+        this.E11.powerOn = 1
+        this.E12.powerOn = 1
+
+
+
